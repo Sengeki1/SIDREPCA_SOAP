@@ -16,7 +16,7 @@ public class Viagem {
         this.hora_chegada = hora_chegada;
     }
 
-    public int getId_navio() {
+    public int getId_Viagem() {
         return this.id_viagem;
     }
 }

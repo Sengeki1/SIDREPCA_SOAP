@@ -1,16 +1,18 @@
 package org.example;
 
 public class Passageiro {
-    private int idPassageiro;
     private String nome;
     private int idade;
-    public Passageiro(int idPassageiro, String nome, int idade) {
-        this.idPassageiro = idPassageiro;
+    public Passageiro(String nome, int idade) {
         this.nome = nome;
         this.idade = idade;
     }
 
-    public int getIdPassageiro() {
-        return this.idPassageiro;
+    public String getNome() {
+        return this.nome;
+    }
+
+    public int getIdade() {
+        return this.idade;
     }
 }

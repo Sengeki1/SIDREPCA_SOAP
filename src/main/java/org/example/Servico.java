@@ -18,5 +18,5 @@ public interface Servico {
     @WebMethod
     List<String> informarPassageiros(int id_navio, int id_passageiro);
     @WebMethod
-    String informarNavio(int id_navio);
+    List<String> informarNavio(int id_navio);
 }
