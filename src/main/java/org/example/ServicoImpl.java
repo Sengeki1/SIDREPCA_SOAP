@@ -62,10 +62,10 @@ public class ServicoImpl implements Servico{
     public List<String> informarNavio(int id_navio) {
         List<String> navio = new ArrayList<>(4);
         if (!navios.isEmpty()) {
-            navio.add(0, String.valueOf(navios.get(id_navio).getCarga_bruta()));
-            navio.add(1, String.valueOf(navios.get(id_navio).getNome()));
-            navio.add(2, String.valueOf(navios.get(id_navio).getCalado()));
-            navio.add(3, String.valueOf(navios.get(id_navio).getMAX_PASSAGEIROS()));
+            navio.add(0, "Carga Bruta: " + String.valueOf(navios.get(id_navio).getCarga_bruta()));
+            navio.add(1, "Nome: " + String.valueOf(navios.get(id_navio).getNome()));
+            navio.add(2, "Calado: " + String.valueOf(navios.get(id_navio).getCalado()));
+            navio.add(3, "Numero de Passageiros: " + String.valueOf(navios.get(id_navio).getMAX_PASSAGEIROS()));
         }
         return navio;
     }
