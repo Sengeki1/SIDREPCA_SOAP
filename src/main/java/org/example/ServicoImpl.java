@@ -19,38 +19,38 @@ public class ServicoImpl implements Servico{
     }
 
     @Override
-    public String adicionarPassageiro(int id_navio, String nome, int idade) {
+    public String adicionarPassageiro(int id_viagem, String nome, int idade) {
         Passageiro passageiro = new Passageiro(nome, idade);
-        if (navios.containsKey(id_navio)) {
-            navios.get(id_navio).setPassageiros(passageiro);
-            return "Adicionado Passageiro " + nome + " ao navio " + id_navio + " com sucesso!\n";
+        if (viagens.containsKey(id_viagem)) {
+            viagens.get(id_viagem).setPassageiros(passageiro);
+            return "Adicionado Passageiro " + nome + " a viagem " + id_viagem + " com sucesso!\n";
         }
         return "Não conseguiu adicionar\n";
     }
 
     @Override
     public String adicionarViagem(int id_viagem, int id_navio, String porto_partida, String porto_destino, int hora_partida, int hora_chegada) {
-        Viagem viagem = new Viagem(id_viagem, id_navio, porto_partida, porto_destino, hora_partida, hora_chegada);
+        Viagem viagem = new Viagem(id_viagem, id_navio, navios.get(id_navio).getMAX_PASSAGEIROS(), porto_partida, porto_destino, hora_partida, hora_chegada);
         viagens.put(id_viagem, viagem);
         return "Adicionado viagem " + id_viagem + "\n";
     }
 
     @Override
-    public String informarCarga(int id_navio) {
-        if (!navios.isEmpty()) {
-            return String.valueOf(navios.get(id_navio).getCarga_bruta());
+    public String informarCarga(int id_viagem, int id_navio) {
+        if (!viagens.isEmpty() && !navios.isEmpty()) {
+            return String.valueOf(navios.get(viagens.get(id_viagem).getId_Navio()).getCarga_bruta());
         }
-        return "Nenhum navio!";
+        return "Nenhum navio ou viagem!";
     }
 
     @Override
-    public List<String> informarPassageiros(int id_navio, int id_passageiro) {
-        List<String> passageiros = new ArrayList<>(navios.get(id_navio).getPassageiros().size());
-        if (!navios.isEmpty()) {
-            for (int i = 0; i < navios.get(id_navio).getPassageiros().size(); i++) {
+    public List<String> informarPassageiros(int id_viagem, int id_passageiro) {
+        List<String> passageiros = new ArrayList<>(viagens.get(id_viagem).getPassageiros().size());
+        if (!viagens.isEmpty()) {
+            for (int i = 0; i < viagens.get(id_viagem).getPassageiros().size(); i++) {
                 passageiros.add(i,
-                        (String.valueOf(navios.get(id_navio).getPassageiros().get(i).getNome()) + " , " +
-                                String.valueOf(navios.get(id_navio).getPassageiros().get(i).getIdade())));
+                        (String.valueOf(viagens.get(id_viagem).getPassageiros().get(i).getNome()) + " , " +
+                                String.valueOf(viagens.get(id_viagem).getPassageiros().get(i).getIdade())));
             }
         } else {
             passageiros.add(0, "Erro: invalido id_navio ou id_passageiro");
@@ -65,7 +65,7 @@ public class ServicoImpl implements Servico{
             navio.add(0, String.valueOf(navios.get(id_navio).getCarga_bruta()));
             navio.add(1, String.valueOf(navios.get(id_navio).getNome()));
             navio.add(2, String.valueOf(navios.get(id_navio).getCalado()));
-            navio.add(3, String.valueOf(navios.get(id_navio).getPassageiros().size()));
+            navio.add(3, String.valueOf(navios.get(id_navio).getMAX_PASSAGEIROS()));
         }
         return navio;
     }

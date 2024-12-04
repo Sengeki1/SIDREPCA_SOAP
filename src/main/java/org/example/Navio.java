@@ -8,13 +8,13 @@ public class Navio {
     private String nome;
     private double carga_bruta;
     private double calado;
-    private List<Passageiro> passageiros;
+    private int MAX_PASSAGEIROS;
     public Navio(int id_navio, String nome, double carga_bruta, double calado) {
         this.id_navio = id_navio;
         this.nome = nome;
         this.carga_bruta = carga_bruta;
         this.calado = calado;
-        this.passageiros = new ArrayList<>(100);
+        this.MAX_PASSAGEIROS = (int) (carga_bruta / 2);
     }
 
     public int getId_navio() {
@@ -25,10 +25,6 @@ public class Navio {
         return this.carga_bruta;
     }
 
-    public List<Passageiro> getPassageiros() {
-        return passageiros;
-    }
-
     public String getNome() {
         return this.nome;
     }
@@ -37,7 +33,5 @@ public class Navio {
         return this.calado;
     }
 
-    public void setPassageiros(Passageiro passageiro) {
-        passageiros.add(passageiro);
-    }
+    public int getMAX_PASSAGEIROS() { return this.MAX_PASSAGEIROS; }
 }
